@@ -8,3 +8,7 @@ const client=createClient({
 export const getBlogDetail=async(queries:MicroCMSQueries)=>{
   return await client.get({endpoint:"blog2",queries:queries})
 }
+
+export const getBlogData=async(id:string,queries:MicroCMSQueries)=>{
+  return await client.get({endpoint:"blog2",contentId:id,queries:queries});
+}

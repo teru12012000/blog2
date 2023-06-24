@@ -1,0 +1,20 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import {getBlogDetail,getBlogData} from '../../lib/lib'
+export const getStaticPaths=async()=>{
+  const res=await getBlogDetail({fields:["id"]})
+  const path=res.contents.map(item=>({params:{id:item.id}}))
+  return path;
+}
+const {id} =Astro.params;
+const idstr:string=id as string;
+const data=await getBlogData(idstr,{fields:["title","content"]});
+---
+<Layout title="first-astro-practice">
+  <Header/>
+  <main>
+    <h1>{data.title}</h1>
+    <div set:html={data.content}></div>
+  </main>
+</Layout>
